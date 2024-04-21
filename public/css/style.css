@@ -24,13 +24,30 @@ h1,h2,h3,h4,h5,h6{
     --warning: #EA2027;
     --success: #009432;
     --font-family: "Open Sans", sans-serif;;
-    --box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    --box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;;
     --border-radius: 3px;
-    --border: 1px solid #ddd;
+    --border: 1px solid var(--gray-light);
     --color: #636466; 
     --color-dark: #444;
     --gray: #636466;;
     --gray-dark: #444;
+    --max-width: 1200px;
+    --color-primary: white;
+    --gray-light: #ddd;
+}
+
+/* DEBUG */
+.b1{
+    background-color: red;
+}
+.b2{
+    background: blue;
+}
+.b3{
+    background-color: yellow;
+}
+.b4{
+    background-color: green;
 }
 
 
@@ -59,6 +76,12 @@ h1,h2,h3,h4,h5,h6{
 .justify-content-end{
     justify-content: end;
 }
+.justify-content-between{
+    justify-content: space-between;
+}
+.flex-fill{
+    flex: 1;
+}
 /* MARGIN */
 .m-5{
     margin: 5px;
@@ -68,6 +91,9 @@ h1,h2,h3,h4,h5,h6{
 }
 .m-20{
     margin: 20px;
+}
+.mr-5{
+    margin-right: 5px;
 }
 
 /* PADDING */
@@ -79,4 +105,60 @@ h1,h2,h3,h4,h5,h6{
 }
 .p-20{
     padding: 20px;
+}
+
+/* GENERAl */
+.content{
+    max-width: var(--max-width);
+}
+.btn{
+    border-radius: var(--border-radius);
+    padding: 10px 20px;
+    border: none;
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+}
+.btn:hover{
+    opacity: 0.8;
+    transition: opacity 0.4s;
+}
+.btn-small{
+    padding: 5px 15px;
+}   
+.btn-primary{
+    background: var(--primary);
+    color: var(--color-primary);
+    font-weight: 600;
+}
+.btn-primary-stroke{
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    background: white;
+}
+/* SIDEBAR */
+.sidebar{
+    min-width: 200px;
+}
+
+
+/* HEADER */
+header{
+    box-shadow: var(--box-shadow);
+}
+.header-logo{
+    width: 150px;
+}
+.header-logo img{
+    max-width: 150px;
+}
+
+.header-search{
+    border-radius: var(--border-radius);
+    background-color: var(--gray-light);
+    max-width: 400px;
+}
+.header-search input{
+    border: 0;
+    outline: 0;
+    background: var(--gray-light);
 }
