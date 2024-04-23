@@ -190,17 +190,18 @@ footer{
 }
 
 /* ASIDE */
-.sidebar-nav li{
+.sidebar-nav a{
     padding: 10px;
     cursor: pointer;
     font-size: var(--font-size-small);
     margin-bottom: 5px;
+    display: block;
 }
-.sidebar-nav li:hover{
+.sidebar-nav a:hover{
     opacity: 0.8;
     transition: opacity 0.4s;
 }
-.sidebar-nav li i{
+.sidebar-nav a i{
     color: var(--color-dark);
 }
 .active{
