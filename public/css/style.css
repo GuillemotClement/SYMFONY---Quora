@@ -37,11 +37,51 @@ a{
     --gray-dark: #444;
     --max-width: 1200px;
     --color-primary: white;
-    --gray-light: #ddd;
+    --gray-light: #ecf0f1;
     --footer-background: #0a3d62;
     --font-size-small: 14px;
+    --font-size-regular: 16px;
+    --font-weigth-regular: 400;
+    --font-weigth-semi-bold: 600;
+    --font-weigth-bold: 700;
+
 }
 
+/* GENERIQUE */
+.app-content{
+    background-color: var(--gray-light);
+}
+.block{
+    padding: 20px;
+    border-radius: var(--border-radius);
+    background-color: white;
+    box-shadow: var(--box-shadow);
+}
+.form-row{
+    display: flex;
+    flex-flow: column;
+    margin-bottom: 15px;
+}
+.form-row label{
+    margin-bottom: 5px;
+    font-weight: var(--font-weigth-bold);
+    color: var(--color-dark);
+}
+.form-row input, textarea{
+    font-family: var(--font-family);
+    border: 0;
+    border-radius: var(--border-radius);
+    padding: 10px 15px;
+    background-color: var(--gray-light);
+}
+.form-row textarea{
+    min-height: 120px;
+}
+.form-errors{
+    color: var(--warning);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weigth-semi-bold);
+}
 /* DEBUG */
 .b1{
     background-color: red;
@@ -106,6 +146,9 @@ a{
 }
 .mr-50{
     margin-right: 50px;
+}
+.mb-20{
+    margin-bottom: 20px;
 }
 
 /* PADDING */
@@ -208,3 +251,6 @@ footer{
     border-left: 5px solid var(--primary);
     background-color: var(--primary-light);
 }
+
+/* CONTENT */
+
