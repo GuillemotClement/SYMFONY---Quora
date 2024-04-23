@@ -21,8 +21,6 @@ class QuestionController extends AbstractController
 
         //si le formulaire est soumis et valid
         if($formQuestion->isSubmitted() && $formQuestion->isValid()){
-            //on affiche les données de la requête
-            dump($formQuestion->getData());
         }
 
         return $this->render('question/index.html.twig', [

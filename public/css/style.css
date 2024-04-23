@@ -141,6 +141,9 @@ a{
 .mr-5{
     margin-right: 5px;
 }
+.mr-10{
+    margin-right: 10px;
+}
 .mr-20{
     margin-right: 20px;
 }
@@ -168,6 +171,9 @@ a{
 .py-50{
     padding-bottom: 50px;
     padding-top: 50px;
+}
+.pb-20{
+    padding-bottom: 20px;
 }
 /* GENERAl */
 .content{
@@ -252,5 +258,32 @@ footer{
     background-color: var(--primary-light);
 }
 
-/* CONTENT */
+/* QUESTION */
+.question-content{
+    border-bottom: 1px solid var(--gray-light);
+}
 
+.avatar{
+    width: 50px;
+    border-radius: 50%;
+}
+.small{
+    font-size: var(--font-size-small);
+    font-family: var(--font-family);
+}
+.cliquable{
+    color: var(--primary);
+    font-weight: var(--font-weigth-semi-bold);
+    cursor: pointer;
+}
+.block-shadow:hover{
+    cursor: pointer;
+    box-shadow: none;
+    transition: box-shadow 0.4s;
+}
+.rating-up{
+    color: #0652DD;
+}
+.rating-down{
+    color: var(--warning);
+}
