@@ -9,30 +9,39 @@
 
 {% block body %}
     <div class="block pb-30">
-        <div class="d-flex flex-row-nowrap align-item-center">
-            <h3 class="mr-10">{{ question.title }}</h3>
-            <div class="question-tag">QUESTION</div>
-            <img class="avatar ml-auto" src="https://randomuser.me/api/portraits/women/21.jpg" alt="">
-        </div>
-        <p class="question-text">{{ question.content }}</p>
-        <div class="separator"></div>
-        {% for comment in question.comments %}
-            <div class="question-response-elem mb-20">
-                <div class="d-flex flex-row-nowrap align-items-center mb-20">
-                    <img class="avatar mr-10" src="https://randomuser.me/api/portraits/women/67.jpg" alt="">
-                    <p class="clickable">Marc</p>
-                    <span class="ml-auto small ">12/12/21</span>
+        <div class="d-flex flex-ronowrap">
+            {% include "partials/_rating.html.twig" with { rating:  question.rating }%}
+            <div class="d-flex flex-column">
+                <div class="d-flex flex-row-nowrap align-item-center">
+                    <h3 class="mr-10">{{ question.title }}</h3>
+                    <div class="question-tag">QUESTION</div>
+                    <img class="avatar ml-auto" src="https://randomuser.me/api/portraits/women/21.jpg" alt="">
                 </div>
-                <p class="question-response-text">{{ comment.content }}</p>
+                <p class="question-text">{{ question.content }}</p>
+                <div class="separator"></div>
+                {% for comment in question.comments %}
+                <div class="question-response-elem mb-20 d-flex flex-row-nowrap">
+                {% include "partials/_rating.html.twig" with { rating:  comment.rating }%}
+                    <div class="d-flex flex-column">
+                        <div class="d-flex flex-row-nowrap align-items-center mb-20">
+                            <img class="avatar mr-10" src="https://randomuser.me/api/portraits/women/67.jpg" alt="">
+                            <p class="clickable">Marc</p>
+                            <span class="ml-auto small ">12/12/21</span>
+                        </div>
+                        <p class="question-response-text">{{ comment.content }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="separator"></div>
+                    <div class="comment-form">
+                        <h3 class="pb-20">Votre réponse</h3>
+                        {{ form_start(form) }}
+                            {{ form_rest(form) }}
+                            <button class="btn btn-primary">Soumettre</button>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
             </div>
-        {% endfor %}
-         <div class="separator"></div>
-        <div class="comment-form">
-            <h3 class="pb-20">Votre réponse</h3>
-            {{ form_start(form) }}
-                {{ form_rest(form) }}
-                <button class="btn btn-primary">Soumettre</button>
-            {{ form_end(form) }}
         </div>
-    </div>
+    </div>  
 {% endblock %}
