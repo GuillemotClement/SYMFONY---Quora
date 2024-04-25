@@ -16,5 +16,12 @@
         </div>
         <p class="question-text">{{ question.content }}</p>
         <div class="separator"></div>
+        <div class="comment-form">
+            <h3 class="pb-20">Votre réponse</h3
+            {{ form_start(form) }}
+                {{ form_rest(form) }}
+                <button class="btn btn-primary">Soumettre</button>
+            {{ form_end(form) }}
+        </div>
     </div>
 {% endblock %}

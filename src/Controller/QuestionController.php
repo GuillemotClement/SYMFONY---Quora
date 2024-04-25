@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Question;
+use App\Form\CommentType;
 use App\Form\QuestionType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -48,15 +50,34 @@ class QuestionController extends AbstractController
     #[Route(
         path: "/question/{id}", name:"question_show"
     )]
-    public function show(Question $question): Response
+    public function show(Request $request, Question $question, EntityManagerInterface $em): Response
     {
-        // $question = [
-        //     'name' => "Ma question",
-        //     'content' => "blablalbla"
-        // ];
+        //on vient créer le commentaire
+        $comment = new Comment();
+        // on vient lier la classe du formulaire, et la classe entity
+        $commentForm = $this->createForm(CommentType::class, $comment);
+        //on récupère la requête
+        $commentForm->handleRequest($request);
+
+        if($commentForm->isSubmitted() && $commentForm->isValid()){
+            //on ajoute les valeurs par défaut
+            $comment->setCreatedAt(new \DateTimeImmutable());
+            $comment->setRating(0);
+            //on set directement la ref à la question
+            $comment->setQuestion($question);
+            //on persiste la requete avec l'entity manager
+            $em->persist($comment);
+            $em->flush();
+            //on vient afficher un message flash
+            $this->addFlash('success', "Réponse ajoutée avec succès");
+            //on refresh la page avec uri
+            return $this->redirect($request->getUri());
+        }
 
         return $this->render('question/show.html.twig', [
-            'question' => $question
+            'question' => $question,
+            //on vient ajouter le form dans le render et la méthode createView car formulaire
+            'form' => $commentForm->createView()
         ]);
     }
 }
