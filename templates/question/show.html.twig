@@ -16,8 +16,19 @@
         </div>
         <p class="question-text">{{ question.content }}</p>
         <div class="separator"></div>
+        {% for comment in question.comments %}
+            <div class="question-response-elem mb-20">
+                <div class="d-flex flex-row-nowrap align-items-center mb-20">
+                    <img class="avatar mr-10" src="https://randomuser.me/api/portraits/women/67.jpg" alt="">
+                    <p class="clickable">Marc</p>
+                    <span class="ml-auto small ">12/12/21</span>
+                </div>
+                <p class="question-response-text">{{ comment.content }}</p>
+            </div>
+        {% endfor %}
+         <div class="separator"></div>
         <div class="comment-form">
-            <h3 class="pb-20">Votre réponse</h3
+            <h3 class="pb-20">Votre réponse</h3>
             {{ form_start(form) }}
                 {{ form_rest(form) }}
                 <button class="btn btn-primary">Soumettre</button>

@@ -65,6 +65,8 @@ class QuestionController extends AbstractController
             $comment->setRating(0);
             //on set directement la ref à la question
             $comment->setQuestion($question);
+            //on vient mettre à jour le nombre de response à une question
+            $question->setNumberOfResponse($question->getNumberOfResponse() +1);
             //on persiste la requete avec l'entity manager
             $em->persist($comment);
             $em->flush();
