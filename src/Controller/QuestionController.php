@@ -34,6 +34,8 @@ class QuestionController extends AbstractController
             $em->persist($question);
             //on execute la requete
             $em->flush();
+            //ajout du message flash 
+            $this->addFlash('success', "Votre question a bien été ajoutée");
             //on redirige l'user sur la page d'accueil une fois le formulaire soumis
             return $this->redirectToRoute('home');
         }

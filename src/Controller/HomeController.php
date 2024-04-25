@@ -11,6 +11,9 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(): Response
     {
+        // $this->addFlash('success', "Votre question a bien été ajoutée");
+
+
         $questions = [[
             'id'=> '1',
             "title"=> "Comment résoudre les erreurs 404 dans un site web ?",
