@@ -48,12 +48,12 @@ class QuestionController extends AbstractController
     #[Route(
         path: "/question/{id}", name:"question_show"
     )]
-    public function show(Request $request, string $id): Response
+    public function show(Question $question): Response
     {
-        $question = [
-            'name' => "Ma question",
-            'content' => "blablalbla"
-        ];
+        // $question = [
+        //     'name' => "Ma question",
+        //     'content' => "blablalbla"
+        // ];
 
         return $this->render('question/show.html.twig', [
             'question' => $question

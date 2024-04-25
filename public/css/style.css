@@ -44,7 +44,7 @@ a{
     --font-weigth-regular: 400;
     --font-weigth-semi-bold: 600;
     --font-weigth-bold: 700;
-
+    --line-height-hight: 30px;
 }
 
 /* GENERIQUE */
@@ -153,6 +153,12 @@ a{
 .mb-20{
     margin-bottom: 20px;
 }
+.mr-auto{
+    margin-right: auto;
+}
+.ml-auto{
+    margin-left: auto;
+}
 
 /* PADDING */
 .p-5{
@@ -174,6 +180,9 @@ a{
 }
 .pb-20{
     padding-bottom: 20px;
+}
+.pb-30{
+    padding-bottom: 30px;
 }
 /* GENERAl */
 .content{
@@ -296,4 +305,9 @@ footer{
 }
 .flash-success{
     background: var(--success);
+}
+
+.separator{
+    border-bottom: 1px solid var(--gray-light);
+    margin: 30px 0;
 }
