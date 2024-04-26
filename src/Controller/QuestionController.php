@@ -82,4 +82,22 @@ class QuestionController extends AbstractController
             'form' => $commentForm->createView()
         ]);
     }
+
+    #[Route('/question/rating/{id}/{score}', name: 'question_rating')]
+    public function ratingQuestion(Question $question, int $score, EntityManagerInterface $em, Request $request)
+    {
+        $question->setRating($question->getRating() + $score);
+        $em->flush();
+        $referer = $request->server->get('HTTP_REFERER');
+        return $referer ? $this->redirect($referer) : $this->redirectToRoute('home');
+    }
+
+    #[Route('/comment/rating/{id}/{score}', name: 'comment_rating')]
+    public function ratingComment(Comment $comment, int $score, EntityManagerInterface $em, Request $request)
+    {
+        $comment->setRating($comment->getRating() + $score);
+        $em->flush();
+        $referer = $request->server->get('HTTP_REFERER');
+        return $referer ? $this->redirect($referer) : $this->redirectToRoute('home');
+    }
 }

@@ -10,7 +10,7 @@
 {% block body %}
     <div class="block pb-30">
         <div class="d-flex flex-ronowrap">
-            {% include "partials/_rating.html.twig" with { rating:  question.rating }%}
+            {% include "partials/_rating.html.twig" with { rating:  question.rating, from: 'question', id: question.id }%}
             <div class="d-flex flex-column">
                 <div class="d-flex flex-row-nowrap align-item-center">
                     <h3 class="mr-10">{{ question.title }}</h3>
@@ -21,7 +21,7 @@
                 <div class="separator"></div>
                 {% for comment in question.comments %}
                 <div class="question-response-elem mb-20 d-flex flex-row-nowrap">
-                {% include "partials/_rating.html.twig" with { rating:  comment.rating }%}
+                {% include "partials/_rating.html.twig" with { rating:  comment.rating, from: 'comment', id: comment.id }%}
                     <div class="d-flex flex-column">
                         <div class="d-flex flex-row-nowrap align-items-center mb-20">
                             <img class="avatar mr-10" src="https://randomuser.me/api/portraits/women/67.jpg" alt="">
