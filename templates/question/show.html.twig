@@ -18,13 +18,15 @@
                     <img class="avatar ml-auto" src="https://randomuser.me/api/portraits/women/21.jpg" alt="">
                 </div>
                 <p class="question-text">{{ question.content }}</p>
-                <div class="separator"></div>
+                {% if question.comments is not empty %}
+                    <div class="separator"></div>
+                {% endif %}
                 {% for comment in question.comments %}
                 <div class="question-response-elem mb-20 d-flex flex-row-nowrap">
                 {% include "partials/_rating.html.twig" with { rating:  comment.rating, from: 'comment', id: comment.id }%}
                     <div class="d-flex flex-column">
                         <div class="d-flex flex-row-nowrap align-items-center mb-20">
-                            <img class="avatar mr-10" src="https://randomuser.me/api/portraits/women/67.jpg" alt="">
+                            <img class="avatar mr-10" src="" alt="">
                             <p class="clickable">Marc</p>
                             <span class="ml-auto small ">{{ comment.createdAt | ago(locale='fr') }}</span>
                         </div>
@@ -32,15 +34,17 @@
                     </div>
                 </div>
                 {% endfor %}
-                <div class="separator"></div>
-                    <div class="comment-form">
-                        <h3 class="pb-20">Votre réponse</h3>
-                        {{ form_start(form) }}
-                            {{ form_rest(form) }}
-                            <button class="btn btn-primary">Soumettre</button>
-                        {{ form_end(form) }}
+                {% if form is defined %}
+                    <div class="separator"></div>
+                        <div class="comment-form">
+                            <h3 class="pb-20">Votre réponse</h3>
+                            {{ form_start(form) }}
+                                {{ form_rest(form) }}
+                                <button class="btn btn-primary">Soumettre</button>
+                            {{ form_end(form) }}
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             </div>
         </div>
     </div>  
