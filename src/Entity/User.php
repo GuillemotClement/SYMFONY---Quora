@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -19,6 +20,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Assert\Email(message: 'Saisir une adresse mail valide')]
+    #[Assert\NotBlank(message: 'Saisir une adresse mail')]
     private ?string $email = null;
 
     /**
@@ -31,12 +34,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Saisir un mot de passe')]
+    #[Assert\Length(min: 6, minMessage:'Saisir un mot de passe de 6 caractères min')]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Saisir un prénom')]
+    #[Assert\Length(min: 2, minMessage:'La valeur du prénom trop courte', max: 255, maxMessage:'La valeur du prénom est trop longue')]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Saisir un nom')]
+    #[Assert\Length(min: 2, minMessage:'La valeur du nom trop courte', max: 255, maxMessage:'La valeur du nom est trop longue')]
     private ?string $lastname = null;
 
     /**
@@ -52,6 +61,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $comments;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Url(message: 'Saisir une URL')]
+    #[Assert\NotBlank(message: 'Veuillez ajouter une image de profil')]
     private ?string $picture = null;
 
     public function __construct()
