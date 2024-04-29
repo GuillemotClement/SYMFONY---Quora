@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ user.fullname }}{% endblock %}
+
+{% block body %}
+    <div class="block">
+        <h2>{{ user.fullname }}</h2>
+        <div>
+            <img src="{{ user.picture}}" alt="" class="profile-picture">
+            <ul>
+                <li>
+                    <strong>Prénom : </strong>{{ user.firstname }}
+                </li>
+                <li>
+                    <strong>Nom : </strong>{{ user.lastname }}
+                </li>
+                <li>
+                    <strong>Email : </strong>{{ user.email }}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="block">
+        <h3>Questions</h3>
+        <ul>
+            {% for question in user.questions %}
+                <li>{{question.title}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="block">
+        <h3>Réponses</h3>
+        <ul>
+            {% for comment in user.comments %}
+                <li>{{comment.content | slice(0, 50) }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

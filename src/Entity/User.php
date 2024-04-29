@@ -38,6 +38,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(min: 6, minMessage:'Saisir un mot de passe de 6 caractères min')]
     private ?string $password = null;
 
+    #[Assert\Length(min: 6, minMessage:'Saisir un mot de passe de 6 caractères min')]
+    private $newPassword;
+
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Saisir un prénom')]
     #[Assert\Length(min: 2, minMessage:'La valeur du prénom trop courte', max: 255, maxMessage:'La valeur du prénom est trop longue')]
@@ -133,6 +136,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): static
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getNewPassword(): ?string
+    {
+        return $this->newPassword;
+    }
+
+    public function setNewPassword(string $newPassword): self
+    {
+        $this->newPassword = $newPassword;
 
         return $this;
     }
