@@ -16,7 +16,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class QuestionController extends AbstractController
 {
     #[Route('/question/ask', name: 'question_form')]
-    
     public function index(Request $request, EntityManagerInterface $em): Response
     {
         $user = $this->getUser();

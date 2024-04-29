@@ -15,7 +15,7 @@
                 <div class="d-flex flex-row-nowrap align-item-center">
                     <h3 class="mr-10">{{ question.title }}</h3>
                     <div class="question-tag">QUESTION</div>
-                    <img class="avatar ml-auto" src="https://randomuser.me/api/portraits/women/21.jpg" alt="">
+                    <img class="avatar ml-auto" src="{{ question.author.picture }}" alt="">
                 </div>
                 <p class="question-text">{{ question.content }}</p>
                 {% if question.comments is not empty %}
@@ -26,9 +26,11 @@
                 {% include "partials/_rating.html.twig" with { rating:  comment.rating, from: 'comment', id: comment.id }%}
                     <div class="d-flex flex-column">
                         <div class="d-flex flex-row-nowrap align-items-center mb-20">
-                            <img class="avatar mr-10" src="" alt="">
-                            <p class="clickable">Marc</p>
-                            <span class="ml-auto small ">{{ comment.createdAt | ago(locale='fr') }}</span>
+                            <a href="{{ path('user', { id: comment.author.id }) }}">
+                                <img class="avatar mr-10" src="{{ comment.author.picture }}" alt="">
+                                <p class="clickable">{{ comment.author.fullname }}</p>
+                                <span class="ml-auto small ">{{ comment.createdAt | ago(locale='fr') }}</span>
+                            </a>
                         </div>
                         <p class="question-response-text">{{ comment.content }}</p>
                     </div>
