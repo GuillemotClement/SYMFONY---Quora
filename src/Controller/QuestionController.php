@@ -7,6 +7,7 @@ use App\Entity\Comment;
 use App\Entity\Question;
 use App\Form\CommentType;
 use App\Form\QuestionType;
+use App\Repository\QuestionRepository;
 use App\Repository\VoteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,8 +53,12 @@ class QuestionController extends AbstractController
     }
 
     #[Route(path: "/question/{id}", name:"question_show")]
-    public function show(Request $request, Question $question, EntityManagerInterface $em): Response
+    public function show(Request $request, QuestionRepository $questionRepo, EntityManagerInterface $em, int $id): Response
     {
+
+        $question = $questionRepo->getQuestionWithCommentAndAuthors($id);
+
+
         $options = [
             'question' => $question
         ];
@@ -98,10 +103,10 @@ class QuestionController extends AbstractController
         $user = $this->getUser();
 
         if($user !== $question->getAuthor()){
-            $vote = $voteRepo->findBy([
+            $vote = $voteRepo->findOneBy([
                 'author'=>$user,
                 'question'=>$question
-            ])[0] ?? null;
+            ]);
             if($vote){
                 if(($vote->isLiked() && $score > 0) || (!$vote->isLiked() && $score < 0)){
                     $em->remove($vote);
@@ -131,10 +136,10 @@ class QuestionController extends AbstractController
     {
         $user = $this->getUser();
         if($user !== $comment->getAuthor()){
-            $vote = $voteRepo->findBy([
+            $vote = $voteRepo->findOneBy([
                 'author'=>$user,
                 'comment'=>$comment
-            ])[0] ?? null;
+            ]);
             if($vote){
                 if(($vote->isLiked() && $score > 0) || (!$vote->isLiked() && $score < 0)){
                     $em->remove($vote);

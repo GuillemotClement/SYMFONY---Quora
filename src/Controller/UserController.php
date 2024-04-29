@@ -29,7 +29,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/user', name: 'current_user')]
-    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function currentUserProfile(EntityManagerInterface $em, UserPasswordHasherInterface $passwordHash, Request $request): Response
     {
         /** @var \App\Entity\User $user */
