@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connection{% endblock %}
+
+{% block body %}
+<div class="block">
+    <h2>Connection</h2>
+    <form action="{{ path('login' ) }}" method="post">
+        <div class="form-row">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="_username" value="{{ username }}">
+        </div>
+        <div class="form-row">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="_password">
+        </div>
+        <div class="form-row">
+            <label for="remember_me">
+                <input type="checkbox" id="remember_me" name="_remember_me">
+                Se souvenir de moi
+            </label>
+        </div>
+
+        {# Token secu #}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        {% if error %}
+            <ul class="form-error pb-20">
+                <li>{{ error.messageKey | trans(error.messageData, 'security') }}</li>
+            </ul>
+        {% endif %}
+        
+        <button class="btn btn-primary">Connection</button>
+    </form>
+</div>
+{% endblock %}
