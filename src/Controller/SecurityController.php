@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\ResetPasswordRepository;
 use App\Repository\UserRepository;
+use App\Service\Uploader;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -35,19 +36,14 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/signup', name: 'signup')]
-    public function signup(UserAuthenticatorInterface $userAuthenticator, Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher, MailerInterface $mailer): Response
+    public function signup(Uploader $upload, UserAuthenticatorInterface $userAuthenticator, Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher, MailerInterface $mailer): Response
     {
         $user = new User();
         $userForm = $this->createForm(UserType::class, $user);
         $userForm->handleRequest($request);
         if($userForm->isSubmitted() && $userForm->isValid()){
             $picture = $userForm->get('pictureFile')->getData();
-            $folder = $this->getParameter('profile.folder');
-            $ext = $picture->guessExtension() ?? 'bin';
-            $filename = bin2hex(random_bytes(10)) . '.' . $ext;
-            $picture->move($folder, $filename);
-            $user->setPicture($this->getParameter('profile.folder.public_path') . '/' . $filename);
-
+            $user->setPicture($upload->uploadProfileImage($picture));
             $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
             $em->persist($user);
             $em->flush();
