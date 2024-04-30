@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\ResetPassword;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\ResetPasswordRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -80,8 +81,17 @@ class SecurityController extends AbstractController
     {
     }
 
+    #[Route('/reset-password/{token}', name: 'reset-assword')]
+    public function resetPassword()
+    {
+        return $this->json('');
+    }
+
+
+
+
     #[Route('reset-password-request', name: 'reset-password-request')]
-    public function resetPasswordRequest(Request $request, UserRepository $userRepo)
+    public function resetPasswordRequest(Request $request, UserRepository $userRepo, ResetPasswordRepository $resetRepo, EntityManagerInterface $em, MailerInterface $mailer)
     {
         $emailForm = $this->createFormBuilder()->add('email', EmailType::class, [
             'constraints' => [
@@ -94,9 +104,16 @@ class SecurityController extends AbstractController
         // Traiter le formulaire
         $emailForm->handleRequest($request);
         if($emailForm->isSubmitted() && $emailForm->isValid()){
-            $email = $emailForm->get('email')->getData();
-            $user = $userRepo->findOneBy(['email' => $email]);
+            $emailValue = $emailForm->get('email')->getData();
+            $user = $userRepo->findOneBy(['email' => $emailValue]);
             if($user){
+                //on vérifie qu'il n'y a pas deja une token
+                //si oui on remplace par un nouveau
+                $oldResetPassword = $resetRepo->findOneBy(['user' => $user]);
+                if($oldResetPassword){
+                    $em->remove($oldResetPassword);
+                    $em->flush();
+                }
                 //si l'user existe, alors on créer el token de reset
                 $resetPassword = new ResetPassword();
                 $resetPassword->setUser($user);
@@ -105,8 +122,20 @@ class SecurityController extends AbstractController
                 //génération du token
                 $token = substr(str_replace(['+', '/', '='], '', base64_encode(random_bytes(30))), 0, 20);
                 $resetPassword->setToken($token);
+                $em->persist($resetPassword);
+                $em->flush();
+                // envoi du mail 
+                $email = new TemplatedEmail();
+                $email->to($emailValue)
+                        ->subject('Demande de réinitialisation de mot de passe')
+                        ->htmlTemplate('@email_templates/reset-password-request.html.twig')
+                        ->context([
+                            'token' => $token
+                        ]);
+                $mailer->send($email);
             }
             $this->addFlash('success', 'Un email à été envoyer pour rénitialiser le mot de passe');
+            return $this->redirectToRoute('home');
         }
         return $this->render('security/reset-password-request.html.twig', [
             'form' => $emailForm->createView()
