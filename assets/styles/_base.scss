@@ -1,0 +1,42 @@
+.content{
+    max-width: var(--max-width);
+}
+.app-content{
+    background-color: var(--gray-light);
+}
+.block{
+    padding: 20px;
+    border-radius: var(--border-radius);
+    background-color: white;
+    box-shadow: var(--box-shadow);
+}
+.block-shadow:hover{
+    cursor: pointer;
+    box-shadow: none;
+    transition: box-shadow 0.4s;
+}
+.avatar{
+    width: 50px;
+    border-radius: 50%;
+}
+.small{
+    font-size: var(--font-size-small);
+    font-family: var(--font-family);
+}
+.cliquable{
+    color: var(--primary);
+    font-weight: var(--font-weigth-semi-bold);
+    cursor: pointer;
+}
+.active{
+    border-left: 5px solid var(--primary);
+    background-color: var(--primary-light);
+}
+.separator{
+    border-bottom: 1px solid var(--gray-light);
+    margin: 30px 0;
+}
+.user-profile{
+    width: 150px;
+    border-radius: 5px;
+}

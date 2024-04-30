@@ -1,0 +1,86 @@
+.d-flex{
+    display: flex;
+}
+.flex-row-nowrap{
+    flex-flow: row nowrap;
+}
+.flex-row-wrap{
+    flex-flow: row wrap;
+}
+.flex-column{
+    flex-direction: column;
+}
+.align-items-center{
+    align-items: center;
+}
+.align-items-end{
+    align-items: end;
+}
+.justify-content-center{
+    justify-content: center;
+}
+.justify-content-end{
+    justify-content: end;
+}
+.justify-content-between{
+    justify-content: space-between;
+}
+.flex-fill{
+    flex: 1;
+}
+/* MARGIN */
+.m-5{
+    margin: 5px;
+}
+.m-10{
+    margin: 10px;
+}
+.m-20{
+    margin: 20px;
+}
+.mr-5{
+    margin-right: 5px;
+}
+.mr-10{
+    margin-right: 10px;
+}
+.mr-20{
+    margin-right: 20px;
+}
+.mr-50{
+    margin-right: 50px;
+}
+.mb-20{
+    margin-bottom: 20px;
+}
+.mr-auto{
+    margin-right: auto;
+}
+.ml-auto{
+    margin-left: auto;
+}
+
+/* PADDING */
+.p-5{
+    padding: 5px;
+}
+.p-10{
+    padding: 10px;
+}
+.p-20{
+    padding: 20px;
+}
+.py-20{
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.py-50{
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+.pb-20{
+    padding-bottom: 20px;
+}
+.pb-30{
+    padding-bottom: 30px;
+}

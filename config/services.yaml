@@ -28,5 +28,5 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Service\Uploader:
         arguments:
-            $profileFolder: '%profile.folder%',
+            $profileFolder: '%profile.folder%'
             $profileFolderPublic: '%profile.folder.public_path%'
