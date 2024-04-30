@@ -18,3 +18,7 @@ a{
 	color: var(--color);
 	text-decoration: none;
 }
+
+input[type = "file"]{
+	width: 100%;
+}

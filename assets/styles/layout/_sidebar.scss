@@ -1,5 +1,11 @@
+@use '../mixin' as *;
+
 .sidebar{
     min-width: 200px;
+    margin-right: 5rem;
+    @include xs {
+        margin-right: 0;
+    }
 }
 .sidebar-nav a{
     padding: 10px;

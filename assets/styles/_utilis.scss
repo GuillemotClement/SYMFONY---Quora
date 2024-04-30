@@ -1,3 +1,5 @@
+@use 'mixin' as *;
+
 .d-flex{
     display: flex;
 }
@@ -9,7 +11,13 @@
 }
 .flex-column{
     flex-direction: column;
+    &-xs{
+        @include xs{
+            flex-direction: column;
+        }
+    }
 }
+
 .align-items-center{
     align-items: center;
 }
@@ -83,4 +91,19 @@
 }
 .pb-30{
     padding-bottom: 30px;
+}
+
+.show-xs{
+    display: none;
+    @include xs {
+        display: inherit;
+    }
+}
+.hide-xs{
+    @include xs {
+        display: none;
+    }
+}
+.hidden{
+    display: none;
 }

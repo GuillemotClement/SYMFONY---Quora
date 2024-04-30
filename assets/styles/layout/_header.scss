@@ -1,3 +1,6 @@
+@use '../mixin' as *;
+
+
 header{
     box-shadow: var(--box-shadow);
 }
@@ -12,9 +15,25 @@ header{
     border-radius: var(--border-radius);
     background-color: var(--gray-light);
     max-width: 400px;
+    margin: 0 1rem;
+    @include xs{
+        display: none;
+    }
 }
 .header-search input{
     border: 0;
     outline: 0;
     background: var(--gray-light);
+}
+
+.burger{
+    font-size: var(--font-size-large);
+}
+
+.menu-xs{
+   a{
+        margin: 1rem 1.5rem;
+   } 
+   border-bottom: var(--border);
+   box-shadow: var(--box-shadow);
 }
