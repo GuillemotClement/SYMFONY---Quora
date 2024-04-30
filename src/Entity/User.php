@@ -64,8 +64,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $comments;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Url(message: 'Saisir une URL')]
-    #[Assert\NotBlank(message: 'Veuillez ajouter une image de profil')]
     private ?string $picture = null;
 
     /**
