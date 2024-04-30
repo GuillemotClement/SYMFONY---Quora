@@ -11,7 +11,7 @@
     {% apply inline_css(source('@email_css/welcome.css')) %}
         <h1>Bienvenue {{ username }}</h1>
         <p>Vous pouvez dès à présent poser vos questions sur Quora</p>
-        <a href="{{ path('login') }}">Me connecter</a>
+        <a href="{{ url('login') }}">Me connecter</a>
     {% endapply %}
 </body>
 </html>
