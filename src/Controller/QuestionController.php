@@ -161,4 +161,16 @@ class QuestionController extends AbstractController
         $referer = $request->server->get('HTTP_REFERER');
         return $referer ? $this->redirect($referer) : $this->redirectToRoute('home');
     }
+
+
+    #[Route('/question/search/{search}', name: 'question_search', priority: 1)]
+    public function questionSearch(string $search = "none", QuestionRepository $questionRepo)
+    {
+        if($search === "none"){
+            $questions = [];
+        }else{
+            $questions = $questionRepo->findBySearch($search);
+        }
+        return $this->json(json_encode($questions));
+    }
 }

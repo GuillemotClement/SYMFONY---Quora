@@ -44,6 +44,15 @@ class QuestionRepository extends ServiceEntityRepository
                     ->getQuery()
                     ->getOneOrNullResult();
     }
+
+    public function findBySearch(string $query){
+        return $this->createQueryBuilder('q')
+                    ->select('q.title, q.id')
+                    ->where('q.title LIKE :search')
+                    ->setParameter('search', "%{$query}%")
+                    ->getQuery()
+                    ->getResult();
+    }
     //    /**
     //     * @return Question[] Returns an array of Question objects
     //     */
